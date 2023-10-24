@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.UI</AssemblyName>
+		<RootNamespace>LandManager.UI</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+	</PropertyGroup>
+
+	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+		<!-- Custom param from here https://stackoverflow.com/a/57911221 -->
+		<Exec Command="npm run prod-build-$(Application)" />
+		<!-- Include the newly-built files in the publish output -->
+		<ItemGroup>
+			<!-- This path should match what's in webpack.config -->
+			<DistFiles Include="wwwroot\**" />
+			<ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+				<RelativePath>%(DistFiles.Identity)</RelativePath>
+				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			</ResolvedFileToPublish>
+		</ItemGroup>
+	</Target>
+
+	<ItemGroup>
+		<Content Update="package*.json" CopyToPublishDirectory="Never" />
+		<Content Update="tsconfig.json" CopyToPublishDirectory="Never" />
+		<Content Update="src/**" CopyToPublishDirectory="Never" />
+	</ItemGroup>
+
+</Project>

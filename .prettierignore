@@ -1,0 +1,2 @@
+# Ignore prod settings files since Prettier formatting messes with Octopus variable syntax
+*.prod.js

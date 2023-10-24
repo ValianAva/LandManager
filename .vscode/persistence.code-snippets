@@ -1,0 +1,18 @@
+{
+	"EF Configuration": {
+		"scope": "csharp",
+		"prefix": "efConfig",
+		"body": [
+			"namespace LandManager.Persistence.Configuration.${TM_DIRECTORY/^.+\\\\(.*)$/$1/} {",
+			"\tpublic class ${TM_FILENAME_BASE} : IEntityTypeConfiguration<${TM_FILENAME_BASE/^(.*)Configuration/${1}/}>",
+			"\t{",
+			"\t\tpublic void Configure(EntityTypeBuilder<${TM_FILENAME_BASE/^(.*)Configuration/${1}/}> entity)",
+			"\t\t{",
+			"\t\t\t$0",
+			"\t\t}",
+			"\t}",
+			"}"
+		],
+		"description": "An Entity Framework configuration file for a single entity"
+	}
+}

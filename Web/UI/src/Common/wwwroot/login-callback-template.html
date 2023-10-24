@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title><%= htmlWebpackPlugin.options.title %></title>
+	</head>
+
+	<body>
+		<script src="dist/oidc-client.js"></script>
+		<script src="<%= htmlWebpackPlugin.options.apiRoot %>/config/settings.js"></script>
+
+		<script>
+			new oidc.UserManager(settings.oidc)
+				.signinRedirectCallback()
+				.then(function (user) {
+					// redirect back to originally requested page
+					// https://stackoverflow.com/a/54629431
+					window.history.replaceState(
+						{},
+						window.document.title,
+						window.location.origin + window.location.pathname
+					);
+
+					window.location = user.state || '/proposals';
+				})
+				.catch(function (e) {
+					console.error(e);
+					window.location = '/';
+				});
+		</script>
+	</body>
+</html>

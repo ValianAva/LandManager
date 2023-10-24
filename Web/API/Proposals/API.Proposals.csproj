@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.API.Proposals</AssemblyName>
+		<RootNamespace>LandManager.API.Proposals</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.AspNetCore.Mvc"></Using>
+		<Using Remove="Microsoft.Extensions.Logging"></Using>
+		<Using Include="LandManager.API.Common.Attributes"></Using>
+		<Using Include="Serilog"></Using>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Infrastructure\Proposals\Infrastructure.Proposals.csproj"/>
+		<ProjectReference Include="..\..\..\Infrastructure\Persistence\Persistence.csproj"/>
+		<ProjectReference Include="..\Common\API.Common.csproj" />
+	</ItemGroup>
+</Project>

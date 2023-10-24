@@ -1,0 +1,62 @@
+{
+	"Controller": {
+		"scope": "csharp",
+		"prefix": "controller",
+		"body": [
+			"namespace LandManager.API.${1:LandManager}.Controllers;",
+			"",
+			"public class ${TM_FILENAME_BASE} : BaseController",
+			"{",
+			"\t",
+			"\t// GET ${TM_FILENAME_BASE/^(.*)Controller/${2}/}",
+			"\t[HttpGet]",
+			"\tpublic async Task<IActionResult> Get()",
+			"\t{",
+			"\t\treturn Ok(await Mediator.Send(new ${2:QueryName}()));",
+			"\t}",
+			"\t",
+			"}"
+		],
+		"description": "An empty API controller that uses MediatR"
+	},
+	"Post Action": {
+		"scope": "csharp",
+		"prefix": "postAction",
+		"body": [
+			"// POST ${TM_FILENAME_BASE/^(.*)Controller/${1}/}",
+			"[HttpPost]",
+			"public async Task<IActionResult> Post([FromBody]$1Command command)",
+			"{",
+			"\tint newId = await Mediator.Send(command);",
+			"\treturn Created(\"/${TM_FILENAME_BASE/^(.*)Controller/${1}/}/\" + newId, newId);",
+			"}"
+		],
+		"description": "A post action which takes an add command"
+	},
+	"Put Action": {
+		"scope": "csharp",
+		"prefix": "putAction",
+		"body": [
+			"// PUT ${TM_FILENAME_BASE/^(.*)Controller/${1}/}",
+			"[PutPostToggle(\"{id}\")]",
+			"public async Task<IActionResult> Put(int Id, [FromBody]$1Command command)",
+			"{",
+			"\treturn Ok(await Mediator.Send(command));",
+			"}"
+		],
+		"description": "A put action which takes an edit command"
+	},
+	"Delete Action": {
+		"scope": "csharp",
+		"prefix": "deleteAction",
+		"body": [
+			"// DELETE ${TM_FILENAME_BASE/^(.*)Controller/${1}/}",
+			"[DeletePostToggle]",
+			"public async Task<IActionResult> Delete([FromQuery]Delete$1Command command)",
+			"{",
+			"\treturn Ok(await Mediator.Send(command));",
+			"}"
+		],
+		"description": "A delete action which takes a delete command"
+	}
+}

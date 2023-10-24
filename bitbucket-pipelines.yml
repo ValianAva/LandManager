@@ -1,0 +1,102 @@
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+definitions:
+  steps:
+    - step: &Restore
+        name: Restore
+        caches:
+          - dotnetcore
+        script:
+          - dotnet restore
+
+    - step: &Build-API
+        name: Build API
+        script:
+          - dotnet build --configuration Release
+          - dotnet publish --no-build Web/API/Proposals --output Published/API/Proposals --configuration Release
+          - dotnet publish --no-build Web/API/Projects --output Published/API/Projects --configuration Release
+          - dotnet publish --no-build Web/API/SSO --output Published/API/SSO --configuration Release
+          - dotnet publish --no-build Infrastructure/Migrations --output Published/Migrations --configuration Release
+          # apparently the syntax taken from https://github.com/dotnet/EntityFramework.Docs/issues/3277#issue-910786478 was the key
+          # all other apt and apt-get calls failed. Maybe it was the apt update
+          # we also need the conditional nuget packages in the csproj and the SQLitePCL.raw.SetProvider call in the test project
+          - apt update && apt install libsqlite3-dev libsqlite3-mod-spatialite -y
+          - dotnet test --configuration Release --no-build --logger:"xunit;LogFilePath=TestResults/test_results.xml"
+        artifacts:
+          - Published/API/**
+          - Published/Migrations/**
+  caches:
+    npm: Web/UI/.npm-cache
+
+pipelines:
+  branches:
+    master:
+      - step: *Restore
+      - step:
+          name: Publish UI
+          size: 2x
+          caches:
+            - npm
+          script:
+            - curl -sL https://deb.nodesource.com/setup_18.x | bash - # https://stackoverflow.com/a/44822491
+            - apt-get install -y nodejs
+            - cd Web/UI && npm run prep-prod-build
+            # Application param is used in UI.csproj to call correct npm script
+            - dotnet restore
+            - dotnet msbuild UI.csproj -target:Publish /p:PublishDir=../../Published/UI/Projects /p:Application=projects
+            - dotnet msbuild UI.csproj -target:Publish /p:PublishDir=../../Published/UI/SSO /p:Application=sso
+            - dotnet msbuild UI.csproj -target:Publish /p:PublishDir=../../Published/UI/Proposals /p:Application=proposals
+          artifacts:
+            - Published/UI/**
+
+      - step: *Build-API
+      - step:
+          name: Push Packages to Octopus
+          image: octopusdeploy/octo:6.17.3-alpine
+          script:
+            - export VERSION=1.0.$BITBUCKET_BUILD_NUMBER
+            - octo pack --id LandManager.Projects.UI --version $VERSION --basePath ./Published/UI/Projects --outFolder ./deploy --format zip
+            - octo push --package ./deploy/LandManager.Projects.UI.$VERSION.zip  --server $OCTOPUS_SERVER --apiKey $OCTOPUS_APIKEY
+
+            - octo pack --id LandManager.Proposals.UI --version $VERSION --basePath ./Published/UI/Proposals --outFolder ./deploy --format zip
+            - octo push --package ./deploy/LandManager.Proposals.UI.$VERSION.zip  --server $OCTOPUS_SERVER --apiKey $OCTOPUS_APIKEY
+
+            - octo pack --id LandManager.SSO.UI --version $VERSION --basePath ./Published/UI/SSO --outFolder ./deploy --format zip
+            - octo push --package ./deploy/LandManager.SSO.UI.$VERSION.zip  --server $OCTOPUS_SERVER --apiKey $OCTOPUS_APIKEY
+
+            - octo pack --id LandManager.Projects.API --version $VERSION --basePath ./Published/API/Projects --outFolder ./deploy --format zip
+            - octo push --package ./deploy/LandManager.Projects.API.$VERSION.zip  --server $OCTOPUS_SERVER --apiKey $OCTOPUS_APIKEY
+
+            - octo pack --id LandManager.Proposals.API --version $VERSION --basePath ./Published/API/Proposals --outFolder ./deploy --format zip
+            - octo push --package ./deploy/LandManager.Proposals.API.$VERSION.zip  --server $OCTOPUS_SERVER --apiKey $OCTOPUS_APIKEY
+
+            - octo pack --id LandManager.SSO.API --version $VERSION --basePath ./Published/API/SSO --outFolder ./deploy --format zip
+            - octo push --package ./deploy/LandManager.SSO.API.$VERSION.zip  --server $OCTOPUS_SERVER --apiKey $OCTOPUS_APIKEY
+
+            - octo pack --id LandManager.Migrations --version $VERSION --basePath ./Published/Migrations/ --outFolder ./deploy --format zip
+            - octo push --package ./deploy/LandManager.Migrations.$VERSION.zip  --server $OCTOPUS_SERVER --apiKey $OCTOPUS_APIKEY
+      - step:
+          name: Deploy to Dev
+          image: octopusdeploy/octo:6.17.3-alpine
+          script:
+            - export VERSION=1.0.$BITBUCKET_BUILD_NUMBER
+            - octo create-release --project LandManager --version $VERSION --packageversion $VERSION --server $OCTOPUS_SERVER --apiKey $OCTOPUS_APIKEY --ignoreexisting
+
+  pull-requests:
+    "**":
+      - step: *Restore
+      - parallel:
+          fail-fast: true
+          steps:
+            - step:
+                # since this is just for PRs, we're not worried about minifying and publishing artifacts. Only need to know if it'll build
+                name: Build UI
+                caches:
+                  - npm
+                script:
+                  - curl -sL https://deb.nodesource.com/setup_18.x | bash - #https://stackoverflow.com/a/44822491
+                  - apt-get install -y nodejs
+                  - cd Web/UI
+                  - npm run prep-prod-build
+                  - npm run build
+            - step: *Build-API

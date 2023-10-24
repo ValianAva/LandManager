@@ -1,0 +1,41 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "src",
+		"declaration": false,
+		"emitDecoratorMetadata": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"importHelpers": true,
+		"jsx": "react",
+		"lib": ["dom", "es2016", "es2017", "es2020"],
+		"module": "esnext",
+		"moduleResolution": "node",
+		"noEmitHelpers": true,
+		"noEmitOnError": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"outDir": "./wwwroot/js/",
+		"pretty": true,
+		"removeComments": true,
+		"sourceMap": true,
+		"strict": true,
+		"strictFunctionTypes": false,
+		"target": "es2017"
+	},
+	"include": ["./src/**/*"],
+	"exclude": [
+		"node_modules",
+		"src/**/*.spec.*",
+		"src/**/settings.js",
+		"src/**/settings.prod.js",
+		"build",
+		"scripts",
+		"webpack"
+	]
+}

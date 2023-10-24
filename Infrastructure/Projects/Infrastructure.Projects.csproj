@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.Infrastructure.Projects</AssemblyName>
+		<RootNamespace>LandManager.Infrastructure.Projects</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="Serilog"></Using>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Common\Infrastructure.Common.csproj"/>
+		<ProjectReference Include="..\..\Core\Application\Projects\Application.Projects.csproj"/>
+	</ItemGroup>
+
+</Project>

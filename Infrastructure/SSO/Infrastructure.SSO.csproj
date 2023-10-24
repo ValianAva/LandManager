@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.Infrastructure.SSO</AssemblyName>
+		<RootNamespace>LandManager.Infrastructure.SSO</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="Serilog"></Using>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Common\Infrastructure.Common.csproj"/>
+		<ProjectReference Include="..\..\Core\Application\SSO\Application.SSO.csproj"/>
+	</ItemGroup>
+
+</Project>

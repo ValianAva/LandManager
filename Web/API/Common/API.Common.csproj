@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.API.Common</AssemblyName>
+		<RootNamespace>LandManager.API.Common</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.LandManager" />
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0"/>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0"/>
+		<PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2"/>
+		<PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1"/>
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0"/>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.16"/>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0"/>
+		<PackageReference Include="Sentry.AspNetCore" Version="3.16.0"/>
+		<PackageReference Include="Sentry.Serilog" Version="3.16.0"/>
+		<PackageReference Include="Serilog.AspNetCore" Version="3.2.0"/>
+		<PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1"/>
+		<PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0"/>
+		<PackageReference Include="Serilog.Sinks.Console" Version="3.1.1"/>
+		<PackageReference Include="Serilog.Sinks.Email" Version="2.3.0"/>
+		<PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Remove="Microsoft.Extensions.Logging"></Using>
+		<Using Include="Serilog"></Using>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Core\Application\Common\Application.Common.csproj"/>
+	</ItemGroup>
+
+</Project>

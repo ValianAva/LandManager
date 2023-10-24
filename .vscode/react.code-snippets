@@ -1,0 +1,26 @@
+{
+	"React Component": {
+		"scope": "typescriptreact",
+		"prefix": "emptyComponent",
+		"body": [
+			"import React from 'react';",
+			"",
+			"export interface I${TM_FILENAME_BASE}Props {}",
+			"",
+			"export const ${TM_FILENAME_BASE} = (props: I${TM_FILENAME_BASE}Props) => {",
+			"",
+			"\treturn (",
+			"\t\t$0",
+			"\t);",
+			"}",
+			""
+		],
+		"description": "An empty React Component"
+	},
+	"Export Statement": {
+		"scope": "typescript",
+		"prefix": "export",
+		"body": ["export { $1 } from './$1';"],
+		"description": "An export statement that has most of the syntax filled in"
+	}
+}

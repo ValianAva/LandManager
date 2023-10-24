@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.Application.Proposals</AssemblyName>
+		<RootNamespace>LandManager.Application.Proposals</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="AutoMapper"></Using>
+		<Using Include="AutoMapper.QueryableExtensions"></Using>
+		<Using Include="Serilog"></Using>
+		<Using Include="MediatR"></Using>
+		<Using Include="Microsoft.EntityFrameworkCore"></Using>
+		<Using Include="LandManager.Application.Common.Exceptions"></Using>
+		<Using Include="LandManager.Application.Common.Interfaces"></Using>
+		<Using Include="LandManager.Application.Proposals.Common.Interfaces"></Using>
+		<Using Remove="System.IO"></Using>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Common\Application.Common.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.Infrastructure.Proposals</AssemblyName>
+		<RootNamespace>LandManager.Infrastructure.Proposals</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="Serilog"></Using>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Common\Infrastructure.Common.csproj"/>
+		<ProjectReference Include="..\..\Core\Application\Proposals\Application.Proposals.csproj"/>
+
+
+	</ItemGroup>
+
+</Project>

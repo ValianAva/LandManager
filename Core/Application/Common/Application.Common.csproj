@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.Application.Common</AssemblyName>
+		<RootNamespace>LandManager.Application.Common</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="FluentValidation" Version="8.6.2"/>
+		<PackageReference Include="MediatR" Version="8.1.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16"/>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
+		<PackageReference Include="NetTopologySuite" Version="2.4.0"/>
+		<PackageReference Include="NetTopologySuite.IO.GeoJSON" Version="2.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="AutoMapper"></Using>
+		<Using Include="AutoMapper.QueryableExtensions"></Using>
+		<Using Include="Serilog"></Using>
+		<Using Include="MediatR"></Using>
+		<Using Include="Microsoft.EntityFrameworkCore"></Using>
+		<Using Include="LandManager.Application.Common.Exceptions"></Using>
+		<Using Include="LandManager.Application.Common.Interfaces"></Using>
+		<Using Remove="System.IO"></Using>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Domain\Domain.csproj" />
+	</ItemGroup>
+
+</Project>

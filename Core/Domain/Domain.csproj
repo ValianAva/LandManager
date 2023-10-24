@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LandManager.Domain</AssemblyName>
+		<RootNamespace>LandManager.Domain</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="NetTopologySuite" Version="2.4.0" />
+		<PackageReference Include="Serilog" Version="2.9.0" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.16"/>
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Remove="System.IO"></Using>
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+	</PropertyGroup>
+
+	<!--https://github.com/dotnet/EntityFramework.Docs/issues/3277#issuecomment-847241842-->
+	<ItemGroup Condition="'$(OS)' == 'Windows_NT'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.16" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(OS)' != 'Windows_NT'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.16" />
+		<PackageReference Include="SQLitePCLRaw.bundle_sqlite3" Version="2.1.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite" Version="6.0.16" />
+		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.16" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+		<PackageReference Include="NSubstitute" Version="5.0.0" />
+		<PackageReference Include="SQLite" Version="3.13.0" />
+		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.4" />
+		<PackageReference Include="XunitXml.TestLogger" Version="3.0.78" />
+		<PackageReference Include="xunit" Version="2.4.2" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="coverlet.collector" Version="3.2.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="NSubstitute"></Using>
+		<Using Include="LandManager.Persistence"></Using>
+		<Using Include="LandManager.Tests"></Using>
+		<Using Include="LandManager.Tests.TestFixtures"></Using>
+		<Using Include="LandManager.Tests.Factories"></Using>
+		<Using Include="Serilog"></Using>
+		<Using Include="Xunit"></Using>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Core\Application\Common\Application.Common.csproj" />
+		<ProjectReference Include="..\Core\Application\Projects\Application.Projects.csproj" />
+		<ProjectReference Include="..\Core\Application\Proposals\Application.Proposals.csproj" />
+
+		<ProjectReference Include="..\Infrastructure\Common\Infrastructure.Common.csproj" />
+		<ProjectReference Include="..\Infrastructure\Projects\Infrastructure.Projects.csproj" />
+		<ProjectReference Include="..\Infrastructure\Proposals\Infrastructure.Proposals.csproj" />
+		<ProjectReference Include="..\Infrastructure\SSO\Infrastructure.SSO.csproj" />
+		<ProjectReference Include="..\Infrastructure\Persistence\Persistence.csproj" />
+
+		<ProjectReference Include="..\Web\API\Projects\API.Projects.csproj" />
+		<ProjectReference Include="..\Web\API\Proposals\API.Proposals.csproj" />
+		<ProjectReference Include="..\Web\API\SSO\API.SSO.csproj" />
+	</ItemGroup>
+
+</Project>

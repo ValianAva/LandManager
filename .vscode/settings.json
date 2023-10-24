@@ -1,0 +1,17 @@
+{
+	"prettier.printWidth": 120,
+	"prettier.singleQuote": true,
+	"prettier.tabWidth": 4,
+	"prettier.trailingComma": "es5",
+	"prettier.useTabs": true,
+	"editor.formatOnSave": true,
+	"files.exclude": {
+		"**/node_modules": true
+	},
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"git.inputValidationSubjectLength": 75,
+	"git.inputValidationLength": 100,
+	"dotnet-test-explorer.testProjectPath": "/Tests",
+	"dotnet.defaultSolution": "LandManager.sln"
+}

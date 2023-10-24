@@ -1,0 +1,159 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Projects API",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "build",
+			"program": "${workspaceFolder}/Web/API/Projects/bin/Debug/net6.0/LandManager.API.Projects.dll",
+			"args": [],
+			"cwd": "${workspaceFolder}/Web/API/Projects",
+			"stopAtEntry": false,
+			"internalConsoleOptions": "openOnSessionStart",
+			"env": {
+				"ASPNETCORE_URLS": "https://localhost:44384",
+				"ASPNETCORE_HTTPS_PORT": "44384",
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"logging": {
+				"programOutput": true,
+				"browserStdOut": true,
+				"engineLogging": false,
+				"exceptions": true,
+				"moduleLoad": false
+			},
+			"launchBrowser": {
+				"enabled": false,
+				"args": "${auto-detect-url}",
+				"windows": {
+					"command": "cmd.exe",
+					"args": "/C start ${auto-detect-url}"
+				},
+				"osx": {
+					"command": "open"
+				},
+				"linux": {
+					"command": "xdg-open"
+				}
+			}
+		},
+		{
+			"command": "cd web/ui; npm run start-projects",
+			"name": "Projects UI",
+			"request": "launch",
+			"type": "node-terminal"
+		},
+		{
+			"name": "Proposals API",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "build",
+			"program": "${workspaceFolder}/Web/API/Proposals/bin/Debug/net6.0/LandManager.API.Proposals.dll",
+			"args": [],
+			"cwd": "${workspaceFolder}/Web/API/Proposals",
+			"stopAtEntry": false,
+			"internalConsoleOptions": "openOnSessionStart",
+			"env": {
+				"ASPNETCORE_URLS": "https://localhost:44385",
+				"ASPNETCORE_HTTPS_PORT": "44385",
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"logging": {
+				"programOutput": true,
+				"browserStdOut": true,
+				"engineLogging": false,
+				"exceptions": true,
+				"moduleLoad": false
+			},
+			"launchBrowser": {
+				"enabled": false,
+				"args": "${auto-detect-url}",
+				"windows": {
+					"command": "cmd.exe",
+					"args": "/C start ${auto-detect-url}"
+				},
+				"osx": {
+					"command": "open"
+				},
+				"linux": {
+					"command": "xdg-open"
+				}
+			}
+		},
+		{
+			"command": "cd web/ui; npm run start-proposals",
+			"name": "Proposals UI",
+			"request": "launch",
+			"type": "node-terminal"
+		},
+		{
+			"name": "SSO API",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "build",
+			"program": "${workspaceFolder}/Web/API/SSO/bin/Debug/net6.0/LandManager.API.SSO.dll",
+			"args": [],
+			"cwd": "${workspaceFolder}/Web/API/SSO",
+			"stopAtEntry": false,
+			"internalConsoleOptions": "openOnSessionStart",
+			"env": {
+				"ASPNETCORE_URLS": "https://localhost:44382",
+				"ASPNETCORE_HTTPS_PORT": "44382",
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"logging": {
+				"programOutput": true,
+				"browserStdOut": true,
+				"engineLogging": false,
+				"exceptions": true,
+				"moduleLoad": false
+			},
+			"launchBrowser": {
+				"enabled": false,
+				"args": "${auto-detect-url}",
+				"windows": {
+					"command": "cmd.exe",
+					"args": "/C start ${auto-detect-url}"
+				},
+				"osx": {
+					"command": "open"
+				},
+				"linux": {
+					"command": "xdg-open"
+				}
+			}
+		},
+		{
+			"command": "cd web/ui; npm run start-sso",
+			"name": "SSO UI",
+			"request": "launch",
+			"type": "node-terminal"
+		},
+	],
+	"compounds": [
+		{
+			"name": "Projects API and UI",
+			"configurations": ["Projects API", "Projects UI"]
+		},
+		{
+			"name": "Proposals API and UI",
+			"configurations": ["Proposals API", "Proposals UI"]
+		},
+		{
+			"name": "SSO API and UI",
+			"configurations": ["SSO API", "SSO UI"]
+		},
+		{
+			"name": "Kitchen Sink",
+			"configurations": [
+				"Projects API",
+				"Projects UI",
+				"Proposals API",
+				"Proposals UI",
+				"SSO API",
+				"SSO UI",
+			]
+		}
+	]
+}

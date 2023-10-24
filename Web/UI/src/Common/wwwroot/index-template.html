@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="height: 100%; margin: 0">
+	<head>
+		<meta charset="utf-8" />
+		<title><%= htmlWebpackPlugin.options.title %></title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<% for (var js in htmlWebpackPlugin.options.additionalScripts) { %>
+		<script src="<%= htmlWebpackPlugin.options.additionalScripts[js] %>" type="text/javascript"></script>
+		<% } %>
+	</head>
+
+	<body style="height: 100%; margin: 0">
+		<div id="app" style="height: 100%; margin: 0">
+			<div style="text-align: center; background-color: #eaeaea; height: 100%; padding-top: 25px">
+				<h2 style="font-weight: 300; font-family: Roboto, Helvetica, Arial, sans-serif; margin-top: 0">
+					<%= htmlWebpackPlugin.options.title %>
+				</h2>
+				<img style="margin: auto" src="dist/img/internal-seal.png" />
+				<h3 style="font-weight: 300; font-family: Roboto, Helvetica, Arial, sans-serif">Loading...</h3>
+			</div>
+		</div>
+
+		<script src="<%= htmlWebpackPlugin.options.apiRoot %>/config/settings.js"></script>
+		<script src="dist/labels.js"></script>
+		<%= htmlWebpackPlugin.tags.bodyTags %>
+	</body>
+</html>
